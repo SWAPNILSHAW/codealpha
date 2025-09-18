@@ -14,13 +14,10 @@ ENV/
 .ipynb_checkpoints/
 
 # Data and model outputs
-output/
-outputs/
-model/
-models/
-*.pkl
-*.csv
-*.png
+#outputs/
+#models/*.pkl
+#*.xlsx
+#*.png
 
 # OS files
 .DS_Store

@@ -11,10 +11,10 @@ __pycache__/
 .vscode/
 
 # Data and model outputs
-outputs/
-models/*.pkl
-*.xlsx
-*.png
+#outputs/
+#models/*.pkl
+#*.xlsx
+#*.png
 
 # Environment
 .env

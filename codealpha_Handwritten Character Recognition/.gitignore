@@ -13,14 +13,11 @@ ENV/
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
-# Data and model outputs
-output/
-outputs/
-model/
-models/
-*.pkl
-*.csv
-*.png
+## Data and model outputs
+#outputs/
+#models/*.pkl
+#*.xlsx
+#*.png
 
 # OS files
 .DS_Store
