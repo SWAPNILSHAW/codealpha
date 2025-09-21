@@ -34,11 +34,7 @@ try:
 except Exception:
     XGB_AVAILABLE = False
 
-RANDOM_SEED = 42
-TEST_SIZE = 0.2
-DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
-MODELS_DIR = os.path.join(os.path.dirname(__file__), "..", "models")
-OUTPUTS_DIR = os.path.join(os.path.dirname(__file__), "..", "outputs")
+# Constants (removed duplicates)
 RANDOM_SEED = 42
 TEST_SIZE = 0.2
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
@@ -56,17 +52,17 @@ DEFAULT_RF_PARAMS = {"n_estimators": 100, "random_state": RANDOM_SEED}
 DEFAULT_LOGREG_PARAMS = {"solver": "liblinear", "random_state": RANDOM_SEED}
 DEFAULT_XGB_PARAMS = {"use_label_encoder": False, "eval_metric": "logloss", "random_state": RANDOM_SEED} if XGB_AVAILABLE else {}
 
-def save_pickle(obj, path):
-    with open(path, "wb") as f:
-        pickle.dump(obj, f)
+# Fixed save_pickle function (removed duplicate)
 def save_pickle(obj, path):
     with open(path, "wb") as f:
         pickle.dump(obj, f)
     print(f"Saved model: {path}")
 
+# Fixed load_csv_if_exists function (added return statement)
 def load_csv_if_exists(path: str) -> pd.DataFrame:
     if os.path.exists(path):
         return pd.read_csv(path)
+    return None  # Added return statement
 
 def try_download_file(url: str, dest: str) -> bool:
     try:
@@ -261,8 +257,6 @@ def train_and_evaluate(X_train, X_test, y_train, y_test, df_test_original: pd.Da
             "y_proba": y_proba
         }
 
-   
-
     # Save outputs (confusion, ROC, predictions, best model)
     def model_score_key(r):
         val = r.get("roc_auc", np.nan)
@@ -272,7 +266,6 @@ def train_and_evaluate(X_train, X_test, y_train, y_test, df_test_original: pd.Da
 
     best_model_name = max(results.keys(), key=lambda k: model_score_key(results[k]))
     best_result = results[best_model_name]
-    # ...existing code...
 
     cm_out = os.path.join(OUTPUTS_DIR, f"{dataset_name}_confusion_matrix.png")
     plot_and_save_confusion_matrix(best_result["confusion_matrix"], labels=["0", "1"], out_path=cm_out, title=f"{dataset_name} - {best_model_name} Confusion Matrix")
@@ -415,7 +408,6 @@ def run_pipeline(use_hyperparam_tuning: bool = False):
         overall_best_path = os.path.join(MODELS_DIR, "best_model.pkl")
         save_pickle(overall_best["model"], overall_best_path)
         print(f"\nOverall best model: dataset='{overall_best['dataset']}', model='{overall_best.get('model_name')}', score={overall_best['score']:.4f}")
-
 
 # ---------------------------
 # CLI
